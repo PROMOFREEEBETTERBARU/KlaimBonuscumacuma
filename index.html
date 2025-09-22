@@ -30,12 +30,11 @@
     .progress-wrap{background:rgba(255,255,255,0.1);border-radius:10px;height:14px;width:100%;margin-top:10px;overflow:hidden}
     .progress-bar{height:100%;background:linear-gradient(90deg,#06b6d4,#0891b2);width:100%;transition:width .5s}
     .testimoni-box{height:180px;overflow:hidden;position:relative}
-    .testimoni-list{display:flex;flex-direction:column;gap:8px;position:absolute;animation:scrollUp 30s linear infinite}
+    .testimoni-list{display:flex;flex-direction:column;gap:8px;position:absolute;animation:scrollUp 40s linear infinite}
     .testimoni-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;font-size:13px;color:#dceff7}
     .avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
-    @keyframes scrollUp{0%{top:100%}100%{top:-250%}}
+    @keyframes scrollUp{0%{top:100%}100%{top:-300%}}
     .important-note{background:rgba(251,191,36,0.15);border-left:4px solid var(--warning);padding:12px;border-radius:10px;color:#fff4ce;font-size:14px;margin-top:16px;display:flex;gap:8px;align-items:flex-start}
-    /* Popup notification */
     .popup{position:fixed;bottom:20px;left:20px;background:rgba(15,23,36,0.95);color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.5);opacity:0;transform:translateY(30px);transition:all .5s ease;z-index:9999;font-size:14px}
     .popup.show{opacity:1;transform:translateY(0)}
   </style>
@@ -100,7 +99,28 @@
     const total = 500;
     let remaining = 457;
 
-    const names = ["Budi","Sinta","Rizky","Dewi","Andi","Fitri","Rian","Yuli","Bayu","Wulan","Agus","Lina","Rama","Tari","Doni","Hendra","Maya","Joko","Nia","Fajar"];
+    const testimoniData = [
+      {name:"Budi",text:"Baru daftar langsung cair, mantap 👍"},
+      {name:"Sinta",text:"Gak perlu depo, saldo masuk beneran"},
+      {name:"Rizky",text:"Cuma isi data, bonus cair ke akun saya"},
+      {name:"Dewi",text:"WD tanpa harus main, keren banget"},
+      {name:"Andi",text:"Kuota terbatas, untung sempet klaim"},
+      {name:"Fitri",text:"Skeptis awalnya, ternyata beneran cair"},
+      {name:"Rian",text:"Udah coba, 25rb masuk!"},
+      {name:"Yuli",text:"Langsung WD, gampang banget"},
+      {name:"Bayu",text:"Gratis saldo asli tanpa tipu-tipu"},
+      {name:"Wulan",text:"Serius ini real, jangan sampai ketinggalan"},
+      {name:"Agus",text:"Proses cepat, saldo nambah otomatis"},
+      {name:"Lina",text:"Baru klik klaim, saldo langsung ada"},
+      {name:"Rama",text:"Kaget, ternyata bener dikasih gratis"},
+      {name:"Tari",text:"Gak ribet, tinggal daftar terus klaim"},
+      {name:"Doni",text:"Udah WD saldo gratisnya, aman banget"},
+      {name:"Hendra",text:"Cuma daftar, langsung dapat uang jajan"},
+      {name:"Maya",text:"Serius gratis, tanpa syarat susah"},
+      {name:"Joko",text:"Ternyata asli cair, mantap pol"},
+      {name:"Nia",text:"Bonus real, langsung masuk akun"},
+      {name:"Fajar",text:"Semoga sering ada promo kayak gini"}
+    ];
 
     function showPopup(name){
       popup.textContent = `🎉 ${name} baru klaim Rp25.000`;
@@ -132,8 +152,8 @@
         remaining--;
         updateCount();
         playSound();
-        const name = names[Math.floor(Math.random()*names.length)];
-        showPopup(name);
+        const t = testimoniData[Math.floor(Math.random()*testimoniData.length)];
+        showPopup(t.name);
       }
     }
 
@@ -166,13 +186,19 @@
 
     // Isi testimoni
     const testimoniList = document.getElementById('testimoniList');
-    names.forEach(n=>{
-      const colors = ["#06b6d4","#f97316","#10b981","#8b5cf6","#ef4444","#eab308","#0ea5e9","#f43f5e","#14b8a6","#9333ea","#facc15","#22c55e","#3b82f6","#f87171","#16a34a","#fb923c","#38bdf8","#ec4899","#84cc16"];
+    const colors = ["#06b6d4","#f97316","#10b981","#8b5cf6","#ef4444","#eab308","#0ea5e9","#f43f5e","#14b8a6","#9333ea","#facc15","#22c55e","#3b82f6","#f87171","#16a34a","#fb923c","#38bdf8","#ec4899","#84cc16"];
+    testimoniData.forEach(t=>{
       const color = colors[Math.floor(Math.random()*colors.length)];
       const item = document.createElement('div');
       item.className='testimoni-item';
-      item.innerHTML = `<div class="avatar" style="background:${color}">${n[0]}</div><div><strong>${n}:</strong> Bonus beneran masuk tanpa harus main!</div>`;
+      item.innerHTML = `<div class="avatar" style="background:${color}">${t.name[0]}</div><div><strong>${t.name}:</strong> ${t.text}</div>`;
       testimoniList.appendChild(item);
+    });
+
+    // Popup pertama kali buka halaman
+    window.addEventListener('load', ()=>{
+      const t = testimoniData[Math.floor(Math.random()*testimoniData.length)];
+      showPopup(t.name);
     });
   </script>
 </body>
