@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>GRATIS SALDO 25.000 — Klaim Sekarang</title>
+  <meta name="description" content="Klaim GRATIS SALDO 25.000 — untuk 500 orang tercepat. Tanpa depo, bisa WD. Kuota terbatas!" />
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass:rgba(255,255,255,0.04)}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; margin:0; background:linear-gradient(180deg,#071023 0%, #051423 100%); color:#e6eef6; -webkit-font-smoothing:antialiased; display:flex; align-items:center; justify-content:center; padding:24px}
+    .container{max-width:980px;width:100%;display:grid;grid-template-columns:1fr 420px;gap:28px}
+    @media (max-width:900px){.container{grid-template-columns:1fr;}}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:28px;box-shadow:0 10px 30px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .hero h1{margin:0;font-size:28px;line-height:1.05}
+    .hero p{margin:10px 0 18px;color:var(--muted)}
+    .badges{display:flex;gap:8px;flex-wrap:wrap}
+    .badge{background:var(--glass);padding:8px 12px;border-radius:999px;font-weight:600;font-size:13px;color:#cfeff6}
+
+    .list{margin-top:14px}
+    .list li{margin:10px 0;display:flex;gap:12px;align-items:flex-start}
+    .dot{min-width:20px;height:20px;border-radius:6px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700}
+
+    .cta-wrap{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .btn{appearance:none;border:0;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#0891b2);color:#042027}
+    .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
+
+    .side{display:flex;flex-direction:column;gap:16px}
+    .card.small{padding:18px}
+    .count{font-size:42px;font-weight:800;color:var(--accent)}
+    .small-muted{color:var(--muted);font-size:13px}
+
+    .link-box{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;display:flex;gap:8px;align-items:center}
+    .link-input{flex:1;border:0;background:transparent;color:#cdecef;outline:none;font-weight:600}
+
+    .footer{margin-top:14px;color:var(--muted);font-size:13px}
+
+    .pulse{animation:pulse 1.6s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
+
+    .note{background:linear-gradient(90deg, rgba(6,182,212,0.06), rgba(8,145,178,0.03));border-left:4px solid var(--accent);padding:12px;border-radius:8px;color:#bfeff6}
+  </style>
+</head>
+<body>
+  <main class="container">
+    <section class="card hero">
+      <div class="badges">
+        <div class="badge">✅ GRATIS SALDO 25.000</div>
+        <div class="badge">💯 100% asli</div>
+        <div class="badge">⏱️ 500 orang tercepat</div>
+      </div>
+
+      <h1 style="margin-top:18px">Klaim Bonus Member Baru — <span style="color:var(--accent)">Gratis Rp25.000</span></h1>
+      <p>Daftar tercepat untuk 500 orang. Tanpa depo, bisa WD — banyak yang sudah cair. Kuota terbatas!</p>
+
+      <ul class="list">
+        <li><div class="dot">1</div><div><strong>Tanpa depo</strong><div class="small-muted">Cukup daftar, klaim, dan nikmati saldo.</div></div></li>
+        <li><div class="dot">2</div><div><strong>Bisa WD</strong><div class="small-muted">Pengguna melaporkan penarikan berhasil.</div></div></li>
+        <li><div class="dot">3</div><div><strong>Kuota terbatas</strong><div class="small-muted">Hanya untuk 500 klaim tercepat.</div></div></li>
+      </ul>
+
+      <div class="cta-wrap">
+        <button class="btn btn-primary" id="claimBtn">👉 Klaim Sekarang</button>
+        <button class="btn btn-ghost" id="copyBtn">🔗 Salin Link</button>
+      </div>
+
+      <div class="footer">
+        NB: Kuota terbatas — klaim sebelum kuota habis!
+      </div>
+
+      <div style="margin-top:14px" class="note">
+        Perhatian: Pastikan membaca syarat & ketentuan pada tautan klaim. Kami tidak menyimpan data Anda.
+      </div>
+    </section>
+
+    <aside class="side">
+      <div class="card small">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div class="small-muted">Klaim tersisa</div>
+            <div class="count pulse" id="remaining">500</div>
+          </div>
+          <div style="text-align:right">
+            <div class="small-muted">Status</div>
+            <div style="font-weight:700;color:#8ef0ff">Aktif</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card small">
+        <div class="small-muted">Tautan klaim</div>
+        <div style="height:8px"></div>
+        <div class="link-box">
+          <input class="link-input" id="claimLink" value="https://jali.me/bonusmemberbaru" readonly />
+          <button class="btn btn-primary" id="openBtn">Buka</button>
+        </div>
+        <div style="margin-top:10px" class="small-muted">Klik "Buka" untuk menuju halaman klaim.</div>
+      </div>
+
+      <div class="card small">
+        <div class="small-muted">Cara pakai</div>
+        <ol style="margin:10px 0 0;color:var(--muted);padding-left:18px">
+          <li>Tekan tombol "Klaim Sekarang".</li>
+          <li>Jika ingin berbagi, salin tautan.</li>
+          <li>Pastikan kuota masih tersedia sebelum membagikan secara luas.</li>
+        </ol>
+      </div>
+    </aside>
+  </main>
+
+  <script>
+    const link = 'https://jali.me/bonusmemberbaru';
+    const claimBtn = document.getElementById('claimBtn');
+    const copyBtn = document.getElementById('copyBtn');
+    const openBtn = document.getElementById('openBtn');
+    const input = document.getElementById('claimLink');
+    const remaining = document.getElementById('remaining');
+
+    claimBtn.addEventListener('click', ()=>{
+      window.open(link, '_blank');
+    });
+    openBtn.addEventListener('click', ()=> window.open(link, '_blank'));
+    copyBtn.addEventListener('click', async ()=>{
+      try{
+        await navigator.clipboard.writeText(link);
+        copyBtn.textContent = '✅ Disalin';
+        setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
+      }catch(e){
+        input.select(); document.execCommand('copy'); copyBtn.textContent = '✅ Disalin'; setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
+      }
+    });
+
+    // Simulasi pengurangan kuota (client-side only, untuk demo)
+    let count = 500;
+    setInterval(()=>{
+      if(count>120){count -= Math.floor(Math.random()*2); remaining.textContent = count}
+    },4000);
+  </script>
+</body>
+</html>
