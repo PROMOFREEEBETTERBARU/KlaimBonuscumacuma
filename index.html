@@ -4,101 +4,87 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>GRATIS SALDO 25.000 — Klaim Sekarang</title>
-  <meta name="description" content="Klaim GRATIS SALDO 25.000 — untuk 500 orang tercepat. Tanpa depo, bisa WD. Kuota terbatas!" />
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass:rgba(255,255,255,0.04);--danger:#ef4444;--vip:#facc15}
-    *{box-sizing:border-box;margin:0;padding:0}
-    html,body{height:100%;}
-    body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial; background:linear-gradient(180deg,#071023 0%, #051423 100%); color:#e6eef6; -webkit-font-smoothing:antialiased; display:flex; justify-content:center; padding:12px}
+    :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass:rgba(255,255,255,0.04);--danger:#ef4444;--vip:#facc15;--warning:#fbbf24}
+    body{font-family:Inter,ui-sans-serif; background:#071023; color:#e6eef6; margin:0; padding:12px; display:flex; justify-content:center}
     .container{max-width:640px;width:100%;display:flex;flex-direction:column;gap:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:20px;box-shadow:0 8px 20px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.05)}
+    .card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));border-radius:14px;padding:20px;box-shadow:0 8px 20px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.05)}
     .hero{text-align:center}
-    .highlight-title{font-size:22px;font-weight:900;color:#06b6d4;line-height:1.3;margin-bottom:14px}
-    .hero img{max-width:100%;height:auto;border-radius:10px;margin:10px 0}
-    .hero p{margin:10px 0 16px;color:var(--muted);font-size:15px}
+    .highlight-title{font-size:22px;font-weight:900;color:#06b6d4;margin-bottom:14px}
+    .hero img{max-width:100%;border-radius:10px;margin:10px 0}
     .badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-    .badge{background:var(--glass);padding:6px 10px;border-radius:999px;font-weight:600;font-size:12px;color:#cfeff6}
+    .badge{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:12px;color:#cfeff6}
     .list{margin:14px 0;text-align:left}
     .list li{margin:8px 0;display:flex;gap:10px;align-items:flex-start;font-size:14px}
-    .dot{min-width:18px;height:18px;border-radius:6px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700;font-size:12px}
+    .dot{min-width:18px;height:18px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700;font-size:12px}
     .cta-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-    .btn{appearance:none;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;transition:all .3s ease}
+    .btn{border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;transition:.3s}
     .btn:hover{transform:scale(1.05)}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#0891b2);color:#042027}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
     .btn-vip{background:linear-gradient(90deg,var(--vip),#f59e0b);color:#1a1200;box-shadow:0 0 10px rgba(250,204,21,0.6);animation:glow 1.5s infinite alternate}
     @keyframes glow{from{box-shadow:0 0 5px rgba(250,204,21,0.5)}to{box-shadow:0 0 20px rgba(250,204,21,1)}}
-    .footer{margin-top:12px;color:var(--muted);font-size:12px;text-align:center}
-    .note{background:linear-gradient(90deg, rgba(6,182,212,0.06), rgba(8,145,178,0.03));border-left:4px solid var(--accent);padding:10px;border-radius:8px;color:#bfeff6;font-size:13px;margin-top:14px}
-    .testimoni-section{margin-top:18px}
-    .testimoni-section h2{text-align:center;font-size:18px;margin-bottom:10px;color:#e6eef6}
-    .testimoni-box{height:160px;overflow:hidden;position:relative}
-    .testimoni-list{display:flex;flex-direction:column;gap:8px;position:absolute;animation:scrollUp 15s linear infinite}
-    .testimoni-item{background:rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;font-size:13px;color:#dceff7}
-    @keyframes scrollUp{0%{top:100%}100%{top:-100%}}
     .counter-box{text-align:center;margin-top:12px;font-size:14px;color:#a9f6ff}
     .counter-number{font-size:20px;font-weight:800;color:#06b6d4;margin-top:4px}
     .warning{margin-top:8px;font-size:14px;font-weight:700;color:var(--danger);display:none}
     .progress-wrap{background:rgba(255,255,255,0.1);border-radius:10px;height:14px;width:100%;margin-top:10px;overflow:hidden}
-    .progress-bar{height:100%;background:linear-gradient(90deg,#06b6d4,#0891b2);width:100%;transition:width .5s ease}
-    @media(min-width:700px){.highlight-title{font-size:28px}.btn{font-size:15px}}
+    .progress-bar{height:100%;background:linear-gradient(90deg,#06b6d4,#0891b2);width:100%;transition:width .5s}
+    .testimoni-box{height:180px;overflow:hidden;position:relative}
+    .testimoni-list{display:flex;flex-direction:column;gap:8px;position:absolute;animation:scrollUp 30s linear infinite}
+    .testimoni-item{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;font-size:13px;color:#dceff7}
+    .avatar{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;color:#fff}
+    @keyframes scrollUp{0%{top:100%}100%{top:-250%}}
+    .important-note{background:rgba(251,191,36,0.15);border-left:4px solid var(--warning);padding:12px;border-radius:10px;color:#fff4ce;font-size:14px;margin-top:16px;display:flex;gap:8px;align-items:flex-start}
+    /* Popup notification */
+    .popup{position:fixed;bottom:20px;left:20px;background:rgba(15,23,36,0.95);color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 4px 12px rgba(0,0,0,0.5);opacity:0;transform:translateY(30px);transition:all .5s ease;z-index:9999;font-size:14px}
+    .popup.show{opacity:1;transform:translateY(0)}
   </style>
 </head>
 <body>
   <main class="container">
     <section class="card hero">
-      <div class="highlight-title">💰 Kesempatan Emas!<br/>Daftar Sekarang & Dapatkan Bonus GRATIS Rp25.000 🚀</div>
+      <div class="highlight-title">💰 Kesempatan Emas! Daftar & Dapatkan Bonus GRATIS Rp25.000 🚀</div>
       <img src="IMG_20250922_142515.jpg" alt="Promo Bonus">
-
       <div class="badges">
         <div class="badge">✅ GRATIS SALDO 25.000</div>
         <div class="badge">💯 100% asli</div>
         <div class="badge">⏱️ 500 orang tercepat</div>
       </div>
-
-      <p>Daftar tercepat untuk 500 orang. Tanpa depo, bisa WD — banyak yang sudah cair. Kuota terbatas!</p>
-
       <ul class="list">
-        <li><div class="dot">1</div><div><strong>Tanpa depo</strong><div class="small-muted">Cukup daftar, klaim, dan nikmati saldo.</div></div></li>
-        <li><div class="dot">2</div><div><strong>Bisa WD</strong><div class="small-muted">Pengguna melaporkan penarikan berhasil.</div></div></li>
-        <li><div class="dot">3</div><div><strong>Kuota terbatas</strong><div class="small-muted">Hanya untuk 500 klaim tercepat.</div></div></li>
+        <li><div class="dot">1</div><div><strong>Tanpa depo</strong></div></li>
+        <li><div class="dot">2</div><div><strong>Bisa WD</strong> — Pengguna bisa menarik tanpa harus bermain & isi saldo.</div></li>
+        <li><div class="dot">3</div><div><strong>Kuota terbatas</strong> — Hanya untuk 500 klaim tercepat.</div></li>
       </ul>
-
       <div class="cta-wrap">
         <button class="btn btn-primary" id="registerBtn">📝 Daftar Dulu</button>
-        <button class="btn btn-ghost disabled" id="claimBtn" disabled>👉 Klaim Sekarang</button>
+        <button class="btn btn-ghost" id="claimBtn" disabled>👉 Klaim Sekarang</button>
       </div>
-
       <div class="cta-wrap">
         <button class="btn btn-vip" id="vipBtn">👑 Daftar VIP Member</button>
       </div>
-
       <div class="counter-box">
         <div>Sisa kuota:</div>
         <div class="counter-number" id="claimedCount">457 orang</div>
         <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-        <div class="warning" id="warningMsg">⚠️ Kuota hampir habis! Segera klaim sekarang!</div>
+        <div class="warning" id="warningMsg">⚠️ Kuota hampir habis!</div>
       </div>
-
-      <div class="footer">NB: Kuota terbatas — klaim sebelum kuota habis!</div>
-      <div class="note">Perhatian: Pastikan membaca syarat & ketentuan pada tautan klaim. Kami tidak menyimpan data Anda.</div>
     </section>
 
     <section class="card testimoni-section">
       <h2>💬 Testimoni Member</h2>
       <div class="testimoni-box">
-        <div class="testimoni-list">
-          <div class="testimoni-item"><strong>Budi:</strong> Mantap! Saldo langsung masuk, bisa WD ke DANA ✅</div>
-          <div class="testimoni-item"><strong>Sinta:</strong> Awalnya ragu, ternyata beneran cair Rp25.000 🙏</div>
-          <div class="testimoni-item"><strong>Rizky:</strong> Gak pake ribet, daftar langsung dapat bonus 💯</div>
-          <div class="testimoni-item"><strong>Dewi:</strong> Terima kasih, sudah masuk ke OVO saya 😍</div>
-          <div class="testimoni-item"><strong>Andi:</strong> Real tanpa deposit, recommended! 👍</div>
-          <div class="testimoni-item"><strong>Fitri:</strong> Baru daftar langsung saldo masuk, keren banget!</div>
-          <div class="testimoni-item"><strong>Rian:</strong> Klaim mudah, kuota cepat habis guys buruan 😱</div>
-        </div>
+        <div class="testimoni-list" id="testimoniList"></div>
       </div>
     </section>
+
+    <section class="important-note">
+      ⚠️ <div>Saldo akan masuk jika data valid, tidak ada kesamaan IP, hanya bisa klaim <strong>1x per orang</strong>.</div>
+    </section>
   </main>
+
+  <div class="popup" id="popup"></div>
+
+  <audio id="tingSound" src="https://assets.mixkit.co/sfx/preview/mixkit-bell-notification-933.mp3" preload="auto"></audio>
 
   <script>
     const link = 'https://f2.gtatogel.io/register?referral_code=aliong888';
@@ -108,60 +94,86 @@
     const claimedCount = document.getElementById('claimedCount');
     const warningMsg = document.getElementById('warningMsg');
     const progressBar = document.getElementById('progressBar');
+    const tingSound = document.getElementById('tingSound');
+    const popup = document.getElementById('popup');
 
     const total = 500;
-    let remaining = 457; // sisa kuota dari 500
+    let remaining = 457;
 
-    registerBtn.addEventListener('click', ()=>{
-      alert('Anda berhasil daftar! Tombol Klaim sekarang aktif.');
-      claimBtn.classList.remove('disabled');
-      claimBtn.removeAttribute('disabled');
-      claimBtn.classList.add('btn-primary');
-    });
+    const names = ["Budi","Sinta","Rizky","Dewi","Andi","Fitri","Rian","Yuli","Bayu","Wulan","Agus","Lina","Rama","Tari","Doni","Hendra","Maya","Joko","Nia","Fajar"];
 
-    claimBtn.addEventListener('click', ()=>{
-      if(!claimBtn.disabled && remaining > 0){
-        window.open(link, '_blank');
-        remaining -= 1;
-        updateCount();
-      }
-    });
-
-    vipBtn.addEventListener('click', ()=>{
-      if(remaining > 0){
-        window.open(link, '_blank');
-        remaining -= 1;
-        updateCount();
-      }
-    });
+    function showPopup(name){
+      popup.textContent = `🎉 ${name} baru klaim Rp25.000`;
+      popup.classList.add('show');
+      setTimeout(()=> popup.classList.remove('show'), 4000);
+    }
 
     function updateCount(){
       if(remaining < 0) remaining = 0;
       claimedCount.textContent = remaining + ' orang';
       const percent = (remaining/total)*100;
       progressBar.style.width = percent + '%';
-
       if(remaining <= 50 && remaining > 0){
         warningMsg.style.display = 'block';
       } else if (remaining === 0) {
-        warningMsg.style.display = 'block';
         warningMsg.textContent = '❌ Kuota sudah habis!';
         claimBtn.disabled = true;
         vipBtn.disabled = true;
-        claimBtn.classList.remove('btn-primary');
       }
     }
 
-    // Simulasi klaim otomatis agar terlihat real-time
-    setInterval(()=>{
-      if(remaining > 0){
-        remaining -= 1;
-        updateCount();
-      }
-    }, 5000);
+    function playSound(){
+      tingSound.currentTime = 0;
+      tingSound.play();
+    }
 
-    // Tampilkan jumlah awal
+    function doClaim(){
+      if(remaining > 0){
+        remaining--;
+        updateCount();
+        playSound();
+        const name = names[Math.floor(Math.random()*names.length)];
+        showPopup(name);
+      }
+    }
+
+    registerBtn.addEventListener('click', ()=>{
+      alert('Anda berhasil daftar! Tombol Klaim aktif.');
+      claimBtn.disabled = false;
+      claimBtn.classList.add('btn-primary');
+    });
+
+    claimBtn.addEventListener('click', ()=>{
+      if(!claimBtn.disabled && remaining > 0){
+        window.open(link,'_blank');
+        doClaim();
+      }
+    });
+
+    vipBtn.addEventListener('click', ()=>{
+      if(remaining > 0){
+        window.open(link,'_blank');
+        doClaim();
+      }
+    });
+
+    // Simulasi klaim otomatis
+    setInterval(()=>{
+      if(remaining > 0) doClaim();
+    }, 6000);
+
     updateCount();
+
+    // Isi testimoni
+    const testimoniList = document.getElementById('testimoniList');
+    names.forEach(n=>{
+      const colors = ["#06b6d4","#f97316","#10b981","#8b5cf6","#ef4444","#eab308","#0ea5e9","#f43f5e","#14b8a6","#9333ea","#facc15","#22c55e","#3b82f6","#f87171","#16a34a","#fb923c","#38bdf8","#ec4899","#84cc16"];
+      const color = colors[Math.floor(Math.random()*colors.length)];
+      const item = document.createElement('div');
+      item.className='testimoni-item';
+      item.innerHTML = `<div class="avatar" style="background:${color}">${n[0]}</div><div><strong>${n}:</strong> Bonus beneran masuk tanpa harus main!</div>`;
+      testimoniList.appendChild(item);
+    });
   </script>
 </body>
 </html>
