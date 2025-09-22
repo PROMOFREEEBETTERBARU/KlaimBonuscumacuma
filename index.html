@@ -22,10 +22,12 @@
     .list li{margin:8px 0;display:flex;gap:10px;align-items:flex-start;font-size:14px}
     .dot{min-width:18px;height:18px;border-radius:6px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700;font-size:12px}
     .cta-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
-    .btn{appearance:none;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px}
+    .btn{appearance:none;border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;transition:all .3s ease}
+    .btn:hover{transform:scale(1.05)}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#0891b2);color:#042027}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-    .btn-vip{background:linear-gradient(90deg,var(--vip),#f59e0b);color:#1a1200;box-shadow:0 0 10px rgba(250,204,21,0.5)}
+    .btn-vip{background:linear-gradient(90deg,var(--vip),#f59e0b);color:#1a1200;box-shadow:0 0 10px rgba(250,204,21,0.6);animation:glow 1.5s infinite alternate}
+    @keyframes glow{from{box-shadow:0 0 5px rgba(250,204,21,0.5)}to{box-shadow:0 0 20px rgba(250,204,21,1)}}
     .footer{margin-top:12px;color:var(--muted);font-size:12px;text-align:center}
     .note{background:linear-gradient(90deg, rgba(6,182,212,0.06), rgba(8,145,178,0.03));border-left:4px solid var(--accent);padding:10px;border-radius:8px;color:#bfeff6;font-size:13px;margin-top:14px}
     .testimoni-section{margin-top:18px}
@@ -37,6 +39,8 @@
     .counter-box{text-align:center;margin-top:12px;font-size:14px;color:#a9f6ff}
     .counter-number{font-size:20px;font-weight:800;color:#06b6d4;margin-top:4px}
     .warning{margin-top:8px;font-size:14px;font-weight:700;color:var(--danger);display:none}
+    .progress-wrap{background:rgba(255,255,255,0.1);border-radius:10px;height:14px;width:100%;margin-top:10px;overflow:hidden}
+    .progress-bar{height:100%;background:linear-gradient(90deg,#06b6d4,#0891b2);width:100%;transition:width .5s ease}
     @media(min-width:700px){.highlight-title{font-size:28px}.btn{font-size:15px}}
   </style>
 </head>
@@ -70,8 +74,9 @@
       </div>
 
       <div class="counter-box">
-        <div>Sudah klaim:</div>
-        <div class="counter-number" id="claimedCount">0 orang</div>
+        <div>Sisa kuota:</div>
+        <div class="counter-number" id="claimedCount">457 orang</div>
+        <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
         <div class="warning" id="warningMsg">⚠️ Kuota hampir habis! Segera klaim sekarang!</div>
       </div>
 
@@ -96,14 +101,16 @@
   </main>
 
   <script>
-    const link = 'https://jali.me/bonusmemberbaru';
+    const link = 'https://f2.gtatogel.io/register?referral_code=aliong888';
     const registerBtn = document.getElementById('registerBtn');
     const claimBtn = document.getElementById('claimBtn');
     const vipBtn = document.getElementById('vipBtn');
     const claimedCount = document.getElementById('claimedCount');
     const warningMsg = document.getElementById('warningMsg');
+    const progressBar = document.getElementById('progressBar');
 
-    let count = 0;
+    const total = 500;
+    let remaining = 457; // sisa kuota dari 500
 
     registerBtn.addEventListener('click', ()=>{
       alert('Anda berhasil daftar! Tombol Klaim sekarang aktif.');
@@ -113,34 +120,48 @@
     });
 
     claimBtn.addEventListener('click', ()=>{
-      if(!claimBtn.disabled){
+      if(!claimBtn.disabled && remaining > 0){
         window.open(link, '_blank');
-        count += 1;
+        remaining -= 1;
         updateCount();
       }
     });
 
     vipBtn.addEventListener('click', ()=>{
-      window.open(link, '_blank');
-      count += 1;
-      updateCount();
+      if(remaining > 0){
+        window.open(link, '_blank');
+        remaining -= 1;
+        updateCount();
+      }
     });
 
     function updateCount(){
-      if(count > 500) count = 500;
-      claimedCount.textContent = count + ' orang';
-      if(count >= 450){
+      if(remaining < 0) remaining = 0;
+      claimedCount.textContent = remaining + ' orang';
+      const percent = (remaining/total)*100;
+      progressBar.style.width = percent + '%';
+
+      if(remaining <= 50 && remaining > 0){
         warningMsg.style.display = 'block';
+      } else if (remaining === 0) {
+        warningMsg.style.display = 'block';
+        warningMsg.textContent = '❌ Kuota sudah habis!';
+        claimBtn.disabled = true;
+        vipBtn.disabled = true;
+        claimBtn.classList.remove('btn-primary');
       }
     }
 
     // Simulasi klaim otomatis agar terlihat real-time
     setInterval(()=>{
-      if(count < 500){
-        count += Math.floor(Math.random()*3);
+      if(remaining > 0){
+        remaining -= 1;
         updateCount();
       }
-    }, 4000);
+    }, 5000);
+
+    // Tampilkan jumlah awal
+    updateCount();
   </script>
 </body>
 </html>
