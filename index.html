@@ -17,30 +17,27 @@
     .hero p{margin:10px 0 18px;color:var(--muted)}
     .badges{display:flex;gap:8px;flex-wrap:wrap}
     .badge{background:var(--glass);padding:8px 12px;border-radius:999px;font-weight:600;font-size:13px;color:#cfeff6}
-
     .list{margin-top:14px}
     .list li{margin:10px 0;display:flex;gap:12px;align-items:flex-start}
     .dot{min-width:20px;height:20px;border-radius:6px;display:inline-grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700}
-
     .cta-wrap{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
     .btn{appearance:none;border:0;padding:12px 16px;border-radius:10px;font-weight:700;cursor:pointer}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#0891b2);color:#042027}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
     .side{display:flex;flex-direction:column;gap:16px}
     .card.small{padding:18px}
     .count{font-size:42px;font-weight:800;color:var(--accent)}
     .small-muted{color:var(--muted);font-size:13px}
-
     .link-box{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px;display:flex;gap:8px;align-items:center}
     .link-input{flex:1;border:0;background:transparent;color:#cdecef;outline:none;font-weight:600}
-
     .footer{margin-top:14px;color:var(--muted);font-size:13px}
-
     .pulse{animation:pulse 1.6s infinite}
     @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.02)}100%{transform:scale(1)}}
-
     .note{background:linear-gradient(90deg, rgba(6,182,212,0.06), rgba(8,145,178,0.03));border-left:4px solid var(--accent);padding:12px;border-radius:8px;color:#bfeff6}
+    .section-title{font-size:20px;font-weight:700;margin-top:22px;margin-bottom:12px;color:#e6eef6}
+    .img-box{width:100%;overflow:hidden;border-radius:12px;box-shadow:0 4px 14px rgba(0,0,0,0.4);margin-top:12px}
+    .img-box img{width:100%;display:block}
+    .disabled{opacity:0.5;cursor:not-allowed}
   </style>
 </head>
 <body>
@@ -62,8 +59,8 @@
       </ul>
 
       <div class="cta-wrap">
-        <button class="btn btn-primary" id="claimBtn">👉 Klaim Sekarang</button>
-        <button class="btn btn-ghost" id="copyBtn">🔗 Salin Link</button>
+        <button class="btn btn-primary" id="registerBtn">📝 Daftar Dulu</button>
+        <button class="btn btn-ghost disabled" id="claimBtn" disabled>👉 Klaim Sekarang</button>
       </div>
 
       <div class="footer">
@@ -73,6 +70,12 @@
       <div style="margin-top:14px" class="note">
         Perhatian: Pastikan membaca syarat & ketentuan pada tautan klaim. Kami tidak menyimpan data Anda.
       </div>
+
+      <div class="section-title">📢 Promo</div>
+      <div class="img-box"><img src="IMG_20250922_142515.jpg" alt="Promo Gratis 25.000" /></div>
+
+      <div class="section-title">💬 Testimoni</div>
+      <div class="img-box"><img src="1758532589516.jpg" alt="Bukti Cair Testimoni" /></div>
     </section>
 
     <aside class="side">
@@ -94,15 +97,16 @@
         <div style="height:8px"></div>
         <div class="link-box">
           <input class="link-input" id="claimLink" value="https://jali.me/bonusmemberbaru" readonly />
-          <button class="btn btn-primary" id="openBtn">Buka</button>
+          <button class="btn btn-primary" id="openBtn" disabled>Buka</button>
         </div>
-        <div style="margin-top:10px" class="small-muted">Klik "Buka" untuk menuju halaman klaim.</div>
+        <div style="margin-top:10px" class="small-muted">Klik "Klaim" setelah daftar untuk menuju halaman klaim.</div>
       </div>
 
       <div class="card small">
         <div class="small-muted">Cara pakai</div>
         <ol style="margin:10px 0 0;color:var(--muted);padding-left:18px">
-          <li>Tekan tombol "Klaim Sekarang".</li>
+          <li>Tekan tombol "Daftar Dulu".</li>
+          <li>Setelah daftar, tombol klaim aktif.</li>
           <li>Jika ingin berbagi, salin tautan.</li>
           <li>Pastikan kuota masih tersedia sebelum membagikan secara luas.</li>
         </ol>
@@ -112,25 +116,46 @@
 
   <script>
     const link = 'https://jali.me/bonusmemberbaru';
+    const registerBtn = document.getElementById('registerBtn');
     const claimBtn = document.getElementById('claimBtn');
     const copyBtn = document.getElementById('copyBtn');
     const openBtn = document.getElementById('openBtn');
     const input = document.getElementById('claimLink');
     const remaining = document.getElementById('remaining');
 
-    claimBtn.addEventListener('click', ()=>{
-      window.open(link, '_blank');
+    registerBtn.addEventListener('click', ()=>{
+      alert('Anda berhasil daftar! Tombol Klaim sekarang aktif.');
+      claimBtn.classList.remove('disabled');
+      claimBtn.removeAttribute('disabled');
+      openBtn.removeAttribute('disabled');
+      claimBtn.classList.add('btn-primary');
     });
-    openBtn.addEventListener('click', ()=> window.open(link, '_blank'));
-    copyBtn.addEventListener('click', async ()=>{
-      try{
-        await navigator.clipboard.writeText(link);
-        copyBtn.textContent = '✅ Disalin';
-        setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
-      }catch(e){
-        input.select(); document.execCommand('copy'); copyBtn.textContent = '✅ Disalin'; setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
+
+    claimBtn.addEventListener('click', ()=>{
+      if(!claimBtn.disabled){
+        window.open(link, '_blank');
       }
     });
+
+    if(copyBtn){
+      copyBtn.addEventListener('click', async ()=>{
+        try{
+          await navigator.clipboard.writeText(link);
+          copyBtn.textContent = '✅ Disalin';
+          setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
+        }catch(e){
+          input.select(); document.execCommand('copy'); copyBtn.textContent = '✅ Disalin'; setTimeout(()=> copyBtn.textContent = '🔗 Salin Link',1500);
+        }
+      });
+    }
+
+    if(openBtn){
+      openBtn.addEventListener('click', ()=>{
+        if(!openBtn.disabled){
+          window.open(link, '_blank');
+        }
+      });
+    }
 
     // Simulasi pengurangan kuota (client-side only, untuk demo)
     let count = 500;
