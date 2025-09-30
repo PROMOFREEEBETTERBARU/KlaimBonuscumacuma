@@ -19,12 +19,11 @@
     .dot{min-width:18px;height:18px;border-radius:6px;display:grid;place-items:center;background:linear-gradient(180deg,var(--accent),#0891b2);font-weight:700;font-size:12px}
     .cta-wrap{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:14px}
     .btn{border:0;padding:10px 14px;border-radius:10px;font-weight:700;cursor:pointer;font-size:14px;transition:.3s;text-decoration:none;display:inline-block}
-    .btn:hover{transform:scale(1.05)}
+    .btn:hover{transform:scale(1.03)}
     .btn-primary{background:linear-gradient(90deg,var(--accent),#0891b2);color:#042027}
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfeff6}
     .btn-claim{background:linear-gradient(90deg,var(--claim1),var(--claim2));color:#fff;font-weight:900;box-shadow:0 0 10px rgba(34,197,94,0.6)}
     .btn-vip{background:linear-gradient(90deg,var(--vip),#f59e0b);color:#1a1200;box-shadow:0 0 10px rgba(250,204,21,0.6);animation:glow 1.5s infinite alternate}
-    .btn.disabled{opacity:0.5;pointer-events:none;filter:grayscale(0.2)}
     @keyframes glow{from{box-shadow:0 0 5px rgba(250,204,21,0.5)}to{box-shadow:0 0 20px rgba(250,204,21,1)}}
     .counter-box{text-align:center;margin-top:12px;font-size:14px;color:#a9f6ff}
     .counter-number{font-size:20px;font-weight:800;color:#06b6d4;margin-top:4px}
@@ -52,20 +51,23 @@
         <div class="badge">💯 100% asli</div>
         <div class="badge">⏱️ Kuota Habis</div>
       </div>
+
       <ul class="list">
         <li><div class="dot">1</div><div><strong>Tanpa depo</strong></div></li>
         <li><div class="dot">2</div><div><span class="icon">🏦💳</span><strong>Bisa klaim ke semua bank & e-wallet</strong> — pastikan penulisan data bank dan nama benar.</div></li>
         <li><div class="dot">3</div><div><strong>Bisa WD</strong> — Pengguna bisa menarik tanpa harus bermain & isi saldo.</div></li>
         <li><div class="dot">4</div><div><strong>Kuota terbatas</strong> — Kuota sudah habis.</div></li>
       </ul>
+
       <div class="cta-wrap">
-        <!-- tombol-tombol di-nonaktifkan karena kuota habis -->
-        <a href="#" class="btn btn-primary disabled" aria-disabled="true">❌ Kuota Habis</a>
-        <a href="#" class="btn btn-claim disabled" aria-disabled="true">❌ Kuota Habis</a>
+        <!-- Tombol aktif: ganti data-href dengan URL tujuan Anda -->
+        <a href="#" class="btn btn-primary" role="button" data-href="https://example.com/daftar-vip" onclick="handleAction(event,'vip')">Daftar vip member</a>
+
+        <a href="#" class="btn btn-ghost" role="button" data-href="https://example.com/daftar-id-vip-gacor" onclick="handleAction(event,'idv')">DAFTAR ID VIP GACOR</a>
+
+        <a href="#" class="btn btn-claim" role="button" data-href="https://example.com/klaim-bonus" onclick="handleAction(event,'claim')">KLAIM BONUS 100%</a>
       </div>
-      <div class="cta-wrap">
-        <a href="#" class="btn btn-vip disabled" aria-disabled="true">👑 AKUN VIP — TUTUP</a>
-      </div>
+
       <div class="counter-box">
         <div>Sisa kuota:</div>
         <div class="counter-number" id="claimedCount">0 orang</div>
@@ -93,11 +95,10 @@
     const claimedCount = document.getElementById('claimedCount');
     const warningMsg = document.getElementById('warningMsg');
     const progressBar = document.getElementById('progressBar');
-    const tingSound = document.getElementById('tingSound');
     const popup = document.getElementById('popup');
 
     const total = 500;
-    // set remaining ke 0 supaya tampil "Kuota Habis"
+    // Kuota tetap habis — ubah nilai ini jika ingin mengaktifkan klaim
     let remaining = 0;
 
     const testimoniData = [
@@ -124,8 +125,7 @@
     ];
 
     function showPopup(name){
-      // Jika kuota habis, jangan munculkan popup klaim
-      if (remaining === 0) return;
+      if (remaining === 0) return; // jangan munculkan popup klaim karena kuota habis
       popup.textContent = `🎉 ${name} Berhasil klaim Rp25.000`;
       popup.classList.add('show');
       setTimeout(()=> popup.classList.remove('show'), 4000);
@@ -142,40 +142,35 @@
       } else if (remaining === 0) {
         warningMsg.style.display = 'block';
         warningMsg.textContent = '❌ Kuota sudah habis!';
-        // pastikan tombol klaim tetap dinonaktifkan
-        document.querySelectorAll('.btn').forEach(b=>{
-          b.classList.add('disabled');
-          b.setAttribute('aria-disabled','true');
-          // jika anchor, hapus href agar tidak navigasi
-          if (b.tagName.toLowerCase() === 'a') b.setAttribute('href','#');
-        });
       } else {
         warningMsg.style.display = 'none';
       }
     }
 
-    function playSound(){
-      tingSound.currentTime = 0;
-      tingSound.play();
-    }
+    // Handler untuk tombol; action: 'vip' | 'idv' | 'claim'
+    function handleAction(e, action){
+      e.preventDefault();
+      const el = e.currentTarget;
+      const href = el.getAttribute('data-href') || '#';
 
-    function doClaim(){
-      // jika kuota habis, klaim tidak dilakukan
-      if(remaining > 0){
-        remaining--;
-        updateCount();
-        playSound();
-        const t = testimoniData[Math.floor(Math.random()*testimoniData.length)];
-        showPopup(t.name);
+      if (action === 'claim') {
+        if (remaining === 0) {
+          // kuota habis — beri tahu pengguna
+          alert('Maaf, kuota sudah habis. Silakan coba lain waktu.');
+          return;
+        } else {
+          // jika kuota tersedia, buka link klaim di tab baru
+          window.open(href, '_blank');
+          return;
+        }
       }
+
+      // Untuk tombol daftar (vip / idv), langsung buka link di tab baru.
+      // NOTE: Ganti data-href dengan URL tujuan yang sebenarnya.
+      window.open(href, '_blank');
     }
 
-    // Hentikan simulasi otomatis karena kuota sudah habis.
-    // (tidak ada setInterval)
-
-    updateCount();
-
-    // Isi testimoni
+    // isi testimoni (tampilan saja)
     const testimoniList = document.getElementById('testimoniList');
     const colors = ["#06b6d4","#f97316","#10b981","#8b5cf6","#ef4444","#eab308","#0ea5e9","#f43f5e","#14b8a6","#9333ea","#facc15","#22c55e","#3b82f6","#f87171","#16a34a","#fb923c","#38bdf8","#ec4899","#84cc16"];
     testimoniData.forEach(t=>{
@@ -186,10 +181,7 @@
       testimoniList.appendChild(item);
     });
 
-    // Jangan munculkan popup klaim ketika halaman dimuat (karena kuota habis)
-    window.addEventListener('load', ()=>{
-      // jika ada testimoni yang mau ditampilkan sebatas informasi, kita tidak munculkan popup klaim
-    });
+    updateCount();
   </script>
 </body>
 </html>
