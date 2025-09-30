@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title> GRATIS SALDO 25.000 YOWESJP — Klaim Sekarang</title>
+  <title> GRATIS SALDO 25.000 YOWESJP — Kuota Habis</title>
   <style>
     :root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;--glass:rgba(255,255,255,0.04);--danger:#ef4444;--vip:#facc15;--warning:#fbbf24;--claim1:#22c55e;--claim2:#16a34a}
     body{font-family:Inter,ui-sans-serif; background:#071023; color:#e6eef6; margin:0; padding:12px; display:flex; justify-content:center}
@@ -24,6 +24,7 @@
     .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#cfeff6}
     .btn-claim{background:linear-gradient(90deg,var(--claim1),var(--claim2));color:#fff;font-weight:900;box-shadow:0 0 10px rgba(34,197,94,0.6)}
     .btn-vip{background:linear-gradient(90deg,var(--vip),#f59e0b);color:#1a1200;box-shadow:0 0 10px rgba(250,204,21,0.6);animation:glow 1.5s infinite alternate}
+    .btn.disabled{opacity:0.5;pointer-events:none;filter:grayscale(0.2)}
     @keyframes glow{from{box-shadow:0 0 5px rgba(250,204,21,0.5)}to{box-shadow:0 0 20px rgba(250,204,21,1)}}
     .counter-box{text-align:center;margin-top:12px;font-size:14px;color:#a9f6ff}
     .counter-number{font-size:20px;font-weight:800;color:#06b6d4;margin-top:4px}
@@ -44,31 +45,32 @@
 <body>
   <main class="container">
     <section class="card hero">
-      <div class="highlight-title">💰 SPESIAL LAUNCHING YOWESJP! Daftar & Dapatkan Bonus GRATIS Rp25.000 🚀</div>
+      <div class="highlight-title">💰 SPESIAL LAUNCHING YOWESJP — Kuota Habis</div>
       <img src="1758851838087.jpg" alt="Promo Bonus">
       <div class="badges">
         <div class="badge">✅ GRATIS SALDO 25.000</div>
         <div class="badge">💯 100% asli</div>
-        <div class="badge">⏱️ 1500 orang tercepat</div>
+        <div class="badge">⏱️ Kuota Habis</div>
       </div>
       <ul class="list">
         <li><div class="dot">1</div><div><strong>Tanpa depo</strong></div></li>
         <li><div class="dot">2</div><div><span class="icon">🏦💳</span><strong>Bisa klaim ke semua bank & e-wallet</strong> — pastikan penulisan data bank dan nama benar.</div></li>
         <li><div class="dot">3</div><div><strong>Bisa WD</strong> — Pengguna bisa menarik tanpa harus bermain & isi saldo.</div></li>
-        <li><div class="dot">4</div><div><strong>Kuota terbatas</strong> — Hanya untuk 1500 Orang, klaim tercepat.</div></li>
+        <li><div class="dot">4</div><div><strong>Kuota terbatas</strong> — Kuota sudah habis.</div></li>
       </ul>
       <div class="cta-wrap">
-        <a href="https://yowesjp.com/register?referral=yowesvip" target="_blank" class="btn btn-primary">📝 Klaim Bonus New Member </a>
-        <a href="https://yowesjp.com/register?referral=yowesvip" target="_blank" class="btn btn-claim">👉 Klaim Bonus 25000 </a>
+        <!-- tombol-tombol di-nonaktifkan karena kuota habis -->
+        <a href="#" class="btn btn-primary disabled" aria-disabled="true">❌ Kuota Habis</a>
+        <a href="#" class="btn btn-claim disabled" aria-disabled="true">❌ Kuota Habis</a>
       </div>
       <div class="cta-wrap">
-        <a href="https://yowesjp.com/register?referral=yowesvip" target="_blank" class="btn btn-vip">👑 DAFTAR Akun VIP Member Gratis </a>
+        <a href="#" class="btn btn-vip disabled" aria-disabled="true">👑 AKUN VIP — TUTUP</a>
       </div>
       <div class="counter-box">
         <div>Sisa kuota:</div>
-        <div class="counter-number" id="claimedCount"> 677 orang</div>
-        <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
-        <div class="warning" id="warningMsg">⚠️ Kuota hampir habis!</div>
+        <div class="counter-number" id="claimedCount">0 orang</div>
+        <div class="progress-wrap"><div class="progress-bar" id="progressBar" style="width:0%"></div></div>
+        <div class="warning" id="warningMsg">❌ Kuota sudah habis!</div>
       </div>
     </section>
 
@@ -80,7 +82,7 @@
     </section>
 
     <section class="important-note">
-      ⚠️ <div>Saldo akan masuk 1 oktober 2025,paling lambat Jam 13:00 WIB.pastikan data valid, tidak ada kesamaan IP, hanya bisa klaim <strong>1x per orang</strong>.</div>
+      ⚠️ <div>Saldo seharusnya masuk 1 Oktober 2025, paling lambat Jam 13:00 WIB — <strong>PERINGATAN:</strong> halaman ini hanya contoh. Jangan masukkan data sensitif pada situs yang mencurigakan.</div>
     </section>
   </main>
 
@@ -95,7 +97,8 @@
     const popup = document.getElementById('popup');
 
     const total = 500;
-    let remaining = 457;
+    // set remaining ke 0 supaya tampil "Kuota Habis"
+    let remaining = 0;
 
     const testimoniData = [
       {name:"Budi",text:"Baru daftar langsung cair, mantap 👍"},
@@ -121,6 +124,8 @@
     ];
 
     function showPopup(name){
+      // Jika kuota habis, jangan munculkan popup klaim
+      if (remaining === 0) return;
       popup.textContent = `🎉 ${name} Berhasil klaim Rp25.000`;
       popup.classList.add('show');
       setTimeout(()=> popup.classList.remove('show'), 4000);
@@ -133,8 +138,19 @@
       progressBar.style.width = percent + '%';
       if(remaining <= 50 && remaining > 0){
         warningMsg.style.display = 'block';
+        warningMsg.textContent = '⚠️ Kuota hampir habis!';
       } else if (remaining === 0) {
+        warningMsg.style.display = 'block';
         warningMsg.textContent = '❌ Kuota sudah habis!';
+        // pastikan tombol klaim tetap dinonaktifkan
+        document.querySelectorAll('.btn').forEach(b=>{
+          b.classList.add('disabled');
+          b.setAttribute('aria-disabled','true');
+          // jika anchor, hapus href agar tidak navigasi
+          if (b.tagName.toLowerCase() === 'a') b.setAttribute('href','#');
+        });
+      } else {
+        warningMsg.style.display = 'none';
       }
     }
 
@@ -144,6 +160,7 @@
     }
 
     function doClaim(){
+      // jika kuota habis, klaim tidak dilakukan
       if(remaining > 0){
         remaining--;
         updateCount();
@@ -153,10 +170,8 @@
       }
     }
 
-    // Simulasi klaim otomatis
-    setInterval(()=>{
-      if(remaining > 0) doClaim();
-    }, 6000);
+    // Hentikan simulasi otomatis karena kuota sudah habis.
+    // (tidak ada setInterval)
 
     updateCount();
 
@@ -167,14 +182,13 @@
       const color = colors[Math.floor(Math.random()*colors.length)];
       const item = document.createElement('div');
       item.className='testimoni-item';
-      item.innerHTML = `<div class=\"avatar\" style=\"background:${color}\">${t.name[0]}</div><div><strong>${t.name}:</strong> ${t.text}</div>`;
+      item.innerHTML = `<div class="avatar" style="background:${color}">${t.name[0]}</div><div><strong>${t.name}:</strong> ${t.text}</div>`;
       testimoniList.appendChild(item);
     });
 
-    // Popup pertama kali buka halaman
+    // Jangan munculkan popup klaim ketika halaman dimuat (karena kuota habis)
     window.addEventListener('load', ()=>{
-      const t = testimoniData[Math.floor(Math.random()*testimoniData.length)];
-      showPopup(t.name);
+      // jika ada testimoni yang mau ditampilkan sebatas informasi, kita tidak munculkan popup klaim
     });
   </script>
 </body>
